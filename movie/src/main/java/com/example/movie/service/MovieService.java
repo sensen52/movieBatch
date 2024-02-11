@@ -49,8 +49,7 @@ public class MovieService {
 
         System.out.println("Response code: " + conn.getResponseCode());
         System.out.println("urlBuilder.toString(): " + urlBuilder.toString());
-        int responseCode = conn.getResponseCode();
-        saveLog(responseCode);
+
 
 
         //  MovieLogDto movieLogDto = new MovieLogDto();
@@ -71,6 +70,8 @@ public class MovieService {
             response.append(line);
         }
 
+
+        saveLog(response.toString());
         rd.close();
         conn.disconnect();
 
@@ -85,10 +86,10 @@ public class MovieService {
         return dto.getData().get(0).getResult();
     }
 
-    public void saveLog(int responseCode) {
+    public void saveLog(String response) {
         Date date = new Date();
         MovieLogDto movieLogDto = new MovieLogDto();
-        movieLogDto.setResponse(String.valueOf(responseCode));
+        movieLogDto.setResponse(response);
         movieLogDto.setCreateTime(date);
         logMapper.insertLog(movieLogDto);
     }
