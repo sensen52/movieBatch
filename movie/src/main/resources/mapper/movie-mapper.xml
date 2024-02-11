@@ -4,8 +4,16 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.movie.mapper.MovieMapper">
     <insert id="insertMovie" parameterType="com.example.movie.dto.MovieDto">
-        INSERT INTO tbl_movies(movieId, title, directorNm, actorNm, nation, type, posters)
-        VALUES (#{movieId}, #{title},  #{directors.directors[0].directorNm}, #{actors.actor[0].actorNm}, #{nation}, #{type},
-                #{posters});
+        INSERT INTO tbl_movies(movieSeq, title, directorNm, actorNm, keywords, nation, type, posters)
+        VALUES (#{movieSeq}, #{title}, #{directors.directors[0].directorNm}, #{actors.actor[0].actorNm}, #{keywords},
+                #{nation}, #{type},
+                #{posters})
+        ON DUPLICATE KEY UPDATE title     = #{title},
+                                directorNm= #{directors.directors[0].directorNm},
+                                actorNm   = #{actors.actor[0].actorNm},
+                                keywords  = #{keywords},
+                                nation    = #{nation},
+                                type      = #{type},
+                                posters   = #{posters}
     </insert>
 </mapper>

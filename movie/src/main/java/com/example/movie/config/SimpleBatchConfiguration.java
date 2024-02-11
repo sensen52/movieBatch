@@ -5,23 +5,21 @@ import com.example.movie.batch.MovieReader;
 import com.example.movie.batch.MovieWriter;
 import com.example.movie.dto.MovieDto;
 import lombok.RequiredArgsConstructor;
-import org.springframework.batch.core.Job;
-import org.springframework.batch.core.JobParameters;
-import org.springframework.batch.core.JobParametersBuilder;
-import org.springframework.batch.core.Step;
+import org.springframework.batch.core.*;
 import org.springframework.batch.core.job.builder.JobBuilder;
 import org.springframework.batch.core.launch.JobLauncher;
+import org.springframework.batch.core.repository.JobExecutionAlreadyRunningException;
+import org.springframework.batch.core.repository.JobInstanceAlreadyCompleteException;
 import org.springframework.batch.core.repository.JobRepository;
+import org.springframework.batch.core.repository.JobRestartException;
 import org.springframework.batch.core.step.builder.StepBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.transaction.PlatformTransactionManager;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
 @RequiredArgsConstructor
-@EnableTransactionManagement
 public class SimpleBatchConfiguration {
 
     private final PlatformTransactionManager transactionManager;
@@ -33,6 +31,7 @@ public class SimpleBatchConfiguration {
 
     @Bean
     public Step movieStep() {
+
         return new StepBuilder("movieStep", jobRepository)
                 .<MovieDto, MovieDto>chunk(10, transactionManager)
                 .reader(movieReader)

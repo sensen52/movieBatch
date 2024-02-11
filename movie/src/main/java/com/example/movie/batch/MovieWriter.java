@@ -1,6 +1,7 @@
 package com.example.movie.batch;
 
 import com.example.movie.dto.MovieDto;
+import com.example.movie.mapper.LogMapper;
 import com.example.movie.mapper.MovieMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.batch.item.Chunk;
@@ -25,4 +26,8 @@ public class MovieWriter implements ItemWriter<MovieDto> {
             movieMapper.insertMovie(movie);// MovieMapper를 사용하여 현재 영화 정보를 데이터베이스에 저장
         }
     }
+
+
+
+
 }

@@ -32,7 +32,6 @@ public class MovieReader implements ItemReader<MovieDto> {
             nextMovie = movies.get(index);
             index++;
         }
-
         return nextMovie;
     }
 }
