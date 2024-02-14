@@ -32,7 +32,7 @@ public class MovieDto {
     private String episodes;
     private String ratedYn;
     private String repRatDate;
-    private String repRlsDate;
+    private String repRlsDate;// 개봉일
     private Ratings ratings;
     private String keywords;
     private String posters;
@@ -99,6 +99,10 @@ class Codes {
 @Getter
 @Setter
 class CommCode {
+    @JsonProperty("CommCodeNm")
+    private String commCodeNm;
+    @JsonProperty("CommCodeNo")
+    private String commCodeNo;
     @JsonProperty("CodeNm")
     private String codeNm;
     @JsonProperty("CodeNo")

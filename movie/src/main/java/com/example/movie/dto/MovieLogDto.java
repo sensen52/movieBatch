@@ -9,6 +9,6 @@ import java.util.Date;
 @Setter
 public class MovieLogDto {
     private Date createTime;
+    private int startCount;
     private String response;
-
 }
