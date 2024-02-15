@@ -47,7 +47,7 @@ public class SimpleBatchConfiguration {
                 .build();
     }
 //초 분 시간 일 월 주
-    @Scheduled(cron = "0 * * * * *")
+    @Scheduled(cron = "0 0 3 * * *")
     public void runMovieJob() throws Exception {
         JobParameters jobParameters = new JobParametersBuilder()
                 .addLong("time", System.currentTimeMillis())
